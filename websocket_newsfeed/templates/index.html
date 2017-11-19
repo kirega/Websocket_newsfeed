@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Websocket_NewsFeed</title>
+<!--<link rel="stylesheet" href="css/style.css">-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+#opt{  
+
+	background-color: #D3D3D3;
+	overflow: hidden;
+}
+
+#sol{
+
+	padding-top: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+textarea {
+    resize:none;
+}
+
+
+input{
+
+	padding-left: 50px;
+
+}
+#oak{
+
+	padding-left: 400px;
+
+}
+
+
+
+#optimus{
+
+	padding-left: 50px;
+}
+
+ body { padding-top: 150px; }
+
+
+</style>
+</head>
+<body>
+
+<script type="text/javascript">  
+  
+  $(document).ready(function(){
+	
+	
+	var socket = io.connect('http://127.0.0.1:5000');    //connect to server
+	socket.on('connect',function(){
+		socket.send(''); //send message to server after connection confirming connection
+		
+	});
+
+
+	socket.on('message',function(msg)  {    //carries data
+		$("#sol").prepend(
+
+
+		'<div id="opt"><h2>'+msg+'</h2><div></div></div>'
+
+
+		);  //features for the message to post	
+		console.log('Latest post');
+
+	});
+
+
+	$('#PostButton').on('click', function(){   //what is to be sent as message after clicking button
+		socket.send($('#MyMessage').val()); //where the message comes from on html(textbox)
+		$('myMessage').val('');//for spacing
+
+	});
+
+
+});
+
+
+</script>
+<nav id="cooler" class="navbar navbar-default navbar-fixed-top">
+	 <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="col-sm-6">
+      <a class="navbar-brand " href="#">Websocket_newsfeed</a>
+      </div>
+      <div class="col-sm-6">
+    </div>
+  </div>
+
+</nav>
+
+
+
+    
+<div>
+   <textarea placeholder="Share something" class="form-control" rows="3"  id="MyMessage"></textarea>
+
+      <button id="PostButton">Post</button>
+
+     <div id="sol"><!--parent div which prepends to child-->
+
+       <div id="messages"></div>  <!-- Where messages are posted(child div)-->
+     </div>
+</div>
+</body>
+<footer></footer>
+</html>
