@@ -1,4 +1,4 @@
-# Websocket_newsfeed
+# Python_Flask_Websocket_newsfeed
 Realtime newsfeed with flask websockets.
 
 download python 3.5 or later
